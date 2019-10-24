@@ -1,6 +1,27 @@
 #Calculating self-attention
 
-Step1: 1. Create three vectors from each of the encoder’s input vectors:
-..Quary Vector
-..Key Vector
-..Value Vector
+Step1: Create three vectors from each of the encoder’s input vectors:
+a. Quary Vector
+b. Key Vector
+c. Value Vector
+
+Step2: calculate self-attention for every word in the input sequence:
+
+e.g. Action gets results
+
+a.To calculate the self-attention for the first word “Action”, we will calculate scores for all the words in the phrase with respect 
+to “Action”. This score determines the importance of other words when we are encoding a certain word in an input sequence
+
+| Words         | Q vector| K vector| V vector| Score  | 
+| ------------- |:-------:| :------:| :------:|:------:|
+| Action        |   q1    |     k1  |    v1   |  q1k1  |
+| gets          |         |     k2  |    v2   |  q1k2  |
+| results       |         |     k3  |    v3   |  q1k3  |
+
+b. Then, these scores are divided by 8 which is the square root of the dimension of the key vector:
+
+| Words         | Q vector| K vector| V vector| Score  | Score  |
+| ------------- |:-------:| :------:| :------:|:------:|:------:|
+| Action        |   q1    |     k1  |    v1   |  q1k1  | q1k1/8 |
+| gets          |         |     k2  |    v2   |  q1k2  | q1k2/8 |
+| results       |         |     k3  |    v3   |  q1k3  | q1k3/8 |
