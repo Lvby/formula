@@ -1,0 +1,6 @@
+#Calculating self-attention
+
+Step1: 1. Create three vectors from each of the encoder’s input vectors:
+..Quary Vector
+..Key Vector
+..Value Vector
