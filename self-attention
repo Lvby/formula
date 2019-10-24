@@ -1,5 +1,14 @@
 #Calculating self-attention
 
+x*Wq=q
+x*Wk=k
+x*Wv=v
+W is the weight
+e.g. x1 * Wq=q1
+
+
+===========================
+
 Step1: Create three vectors from each of the encoder’s input vectors:
 a. Quary Vector
 b. Key Vector
