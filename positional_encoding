@@ -1,5 +1,7 @@
 #https://datascience.stackexchange.com/questions/51065/what-is-the-positional-encoding-in-the-transformer-model
 
+Sin(a+b)=sin(a)cos(b)+sin(b)cos(a)
+Cos(a+b)=cos(a)cos(b)-sin(a)sin(b)
 #check-
 
 # n_position 为句子划分成字符或者词的长度，d_hid为词向量的维度。
