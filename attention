@@ -30,6 +30,8 @@ encorder        score   score^   alignment
 [1, 1, 0]          15     0      [0, 0, 0]
 [0, 5, 1]          35     0      [0, 0, 0]
 
+注:看链接，其他方法 calculating alignment scores https://blog.floydhub.com/attention-mechanism/#luong-att-step1
+
 #Step4. Sum up the alignment vectors
 
 encorder        score   score^   alignment
