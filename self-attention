@@ -19,6 +19,7 @@ to “Action”. This score determines the importance of other words when we are
 | results       |         |     k3  |    v3   |  q1k3  |
 
 b. Then, these scores are divided by 8 which is the square root of the dimension of the key vector:
+ #divided by  d−−√  to make the scores less sensitive to the dimension  d 
 
 | Words         | Q vector| K vector| V vector| Score  | Score  |
 | ------------- |:-------:| :------:| :------:|:------:|:------:|
