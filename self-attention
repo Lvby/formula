@@ -37,8 +37,19 @@ c. Using the softmax activation function to normalize those scores
 
 d. These normalized scores are then multiplied by the value vectors (v1, v2, v3) and sum up the resultant vectors to arrive at the final vector (z1). This is the output of the self-attention layer. It is then passed on to the feed-forward network as input:
 
-| Words         | Q vector| K vector| V vector| Score  | Score  | Softmax|      Sum         |
-| ------------- |:-------:| :------:| :------:|:------:|:------:|:------:|:----------------:|
-| Action        |   q1    |     k1  |    v1   |  q1k1  | q1k1/8 |   x11  | z1<-(x11+x12+x13)|
-| gets          |         |     k2  |    v2   |  q1k2  | q1k2/8 |   x12  |                  |
-| results       |         |     k3  |    v3   |  q1k3  | q1k3/8 |   x13  |                  |
+| Words         | Q vector| K vector| V vector| Score  | Score  | Softmax|Softmax * v|    Sum   |
+| ------------- |:-------:| :------:| :------:|:------:|:------:|:------:|:---------:|:--------:|
+| Action        |   q1    |     k1  |    v1   |  q1k1  | q1k1/8 |   x11  |   x11 *v1 |    z1    |
+| gets          |         |     k2  |    v2   |  q1k2  | q1k2/8 |   x12  |   x12 *v2 |          |
+| results       |         |     k3  |    v3   |  q1k3  | q1k3/8 |   x13  |   x13 *v3 |          |
+
+z1=(x11*v1+x12*v2+x12*v3)
+
+e. z1 is the self-attention vector for the first word of the input sequence “Action gets results”. We can get the vectors for the rest of the words in the input sequence in the same fashion:
+
+| Words         | Q vector| K vector| V vector| Score  | Score  | Softmax|Softmax * v|    Sum   |
+| ------------- |:-------:| :------:| :------:|:------:|:------:|:------:|:---------:|:--------:|
+| Action        |         |     k1  |    v1   |  q2k1  | q2k1/8 |   x21  |   x21 *v1 |          |
+| gets          |   q2    |     k2  |    v2   |  q2k2  | q2k2/8 |   x22  |   x22 *v2 |   z2     |
+| results       |         |     k3  |    v3   |  q2k3  | q2k3/8 |   x23  |   x23 *v3 |          |
+z1=(x21*v1+x22*v2+x22*v3)
