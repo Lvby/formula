@@ -26,3 +26,19 @@ b. Then, these scores are divided by 8 which is the square root of the dimension
 | Action        |   q1    |     k1  |    v1   |  q1k1  | q1k1/8 |
 | gets          |         |     k2  |    v2   |  q1k2  | q1k2/8 |
 | results       |         |     k3  |    v3   |  q1k3  | q1k3/8 |
+
+c. Using the softmax activation function to normalize those scores
+
+| Words         | Q vector| K vector| V vector| Score  | Score  | Softmax|
+| ------------- |:-------:| :------:| :------:|:------:|:------:|:------:|
+| Action        |   q1    |     k1  |    v1   |  q1k1  | q1k1/8 |   x11  |
+| gets          |         |     k2  |    v2   |  q1k2  | q1k2/8 |   x12  |
+| results       |         |     k3  |    v3   |  q1k3  | q1k3/8 |   x13  |
+
+d. These normalized scores are then multiplied by the value vectors (v1, v2, v3) and sum up the resultant vectors to arrive at the final vector (z1). This is the output of the self-attention layer. It is then passed on to the feed-forward network as input:
+
+| Words         | Q vector| K vector| V vector| Score  | Score  | Softmax|      Sum         |
+| ------------- |:-------:| :------:| :------:|:------:|:------:|:------:|:----------------:|
+| Action        |   q1    |     k1  |    v1   |  q1k1  | q1k1/8 |   x11  | z1<-(x11+x12+x13)|
+| gets          |         |     k2  |    v2   |  q1k2  | q1k2/8 |   x12  |                  |
+| results       |         |     k3  |    v3   |  q1k3  | q1k3/8 |   x13  |                  |
