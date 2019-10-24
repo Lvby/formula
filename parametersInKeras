@@ -1,0 +1,28 @@
+#https://stackoverflow.com/questions/38080035/how-to-calculate-the-number-of-parameters-of-an-lstm-network
+
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation
+from keras.layers import Embedding
+from keras.layers import LSTM
+model = Sequential()
+model.add(LSTM(256, input_dim=4096, input_length=16))
+model.summary()
+
+
+_____________________________________________________________________________________
+Layer (type)                       Output Shape        Param #     Connected to         
+=====================================================================================
+lstm_1 (LSTM)                      (None, 256)         4457472     lstm_input_1[0][0]               
+=====================================================================================
+Total params: 4457472
+________________________________
+
+#the number of parameters of a LSTM layer in Keras equal to;
+
+the number of parameters of a LSTM layer in Keras equals to:
+    params = 4 * ((size_of_input + 1) * size_of_output + size_of_output^2)
+    e.g.
+    4 * (4097 * 256 + 256^2) = 4457472
+
+4 means we have different weight and bias variables for 3 gates (read / write / froget) 
+and - 4-th - for the cell state (within same hidden state).
