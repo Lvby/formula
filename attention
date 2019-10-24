@@ -1,0 +1,45 @@
+#Step1. Calculate a score for every hidden state
+
+alignment score function /alignment model. The example here is a dot product between decoder and encorder hidden states
+
+decoder_hidden=[10, 5, 10]
+encoder_hidden    score
+=======================
+[0, 1, 1]          15 = (10x0 + 5x1 + 10x1]= 15 (dot product)
+[5, 0, 1]          60 = (10x5 + 5x0 + 10x1]= 60
+[1, 1, 0]          15
+[0, 5, 1]          35
+
+high attention score is 60 for the encoder hidden state [5,0,1]=>Next word is heavily influenced by this endoder hidden state
+
+#Step2. Run all the scores through softmax layer  (#https://github.com/dizzySummer/latex_math/blob/master/latex/activation%20function%2Bsoftmax.ipynb)
+
+encoder_hidden   score   score^
+===============================
+[0, 1, 1]          15     0
+[5, 0, 1]          60     1
+[1, 1, 0]          15     0
+[0, 5, 1]          35     0
+
+#Step3. Multiply each encoder hidden state by its softmax value
+
+encorder        score   score^   alignment
+==========================================
+[0, 1, 1]          15     0      [0, 0, 0]
+[5, 0, 1]          60     1      [5, 0, 1]
+[1, 1, 0]          15     0      [0, 0, 0]
+[0, 5, 1]          35     0      [0, 0, 0]
+
+#Step4. Sum up the alignment vectors
+
+encorder        score   score^   alignment
+==========================================
+[0, 1, 1]          15     0      [0, 0, 0]
+[5, 0, 1]          60     1      [5, 0, 1]
+[1, 1, 0]          15     0      [0, 0, 0]
+[0, 5, 1]          35     0      [0, 0, 0]
+
+[0+5+0+0, 0+0+0+0, 0+1+0+0]=[5,0,1]
+
+#Step5: Feed the contect vector into the decoder
+
