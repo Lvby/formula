@@ -43,7 +43,7 @@ d. These normalized scores are then multiplied by the value vectors (v1, v2, v3)
 | gets          |         |     k2  |    v2   |  q1k2  | q1k2/8 |   x12  |   x12 *v2 |          |
 | results       |         |     k3  |    v3   |  q1k3  | q1k3/8 |   x13  |   x13 *v3 |          |
 
-z1=(x11*v1+x12*v2+x12*v3)
+z1=(x11*v1+x12*v2+x13*v3)
 
 e. z1 is the self-attention vector for the first word of the input sequence “Action gets results”. We can get the vectors for the rest of the words in the input sequence in the same fashion:
 
@@ -52,7 +52,7 @@ e. z1 is the self-attention vector for the first word of the input sequence “A
 | Action        |         |     k1  |    v1   |  q2k1  | q2k1/8 |   x21  |   x21 *v1 |          |
 | gets          |   q2    |     k2  |    v2   |  q2k2  | q2k2/8 |   x22  |   x22 *v2 |   z2     |
 | results       |         |     k3  |    v3   |  q2k3  | q2k3/8 |   x23  |   x23 *v3 |          |
-z2=(x21*v1+x22*v2+x22*v3)
+z2=(x21*v1+x22*v2+x23*v3)
 
 
 | Words         | Q vector| K vector| V vector| Score  | Score  | Softmax|Softmax * v|    Sum   |
@@ -60,7 +60,7 @@ z2=(x21*v1+x22*v2+x22*v3)
 | Action        |         |     k1  |    v1   |  q3k1  | q3k1/8 |   x31  |   x31 *v1 |          |
 | gets          |         |     k2  |    v2   |  q3k2  | q3k2/8 |   x32  |   x32 *v2 |          |
 | results       |    q3   |     k3  |    v3   |  q3k3  | q3k3/8 |   x33  |   x33 *v3 |     z3   |
-z3=(x21*v1+x22*v2+x22*v3)
+z3=(x31*v1+x32*v2+x33*v3)
 
 
 Self-attention is computed not once but multiple times in the Transformer’s architecture, in parallel and independently. It is therefore referred to as Multi-head Attention. The outputs are concatenated and linearly transformed.
