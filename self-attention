@@ -1,11 +1,13 @@
 #Calculating self-attention
 
+Q,K,V matrices are created by multiplying the embedding of the input words X by three matrices Wq, Wk, Wv which are initialized and learned during training process.
+
 x*Wq=q
 x*Wk=k
 x*Wv=v
 W is the weight
 e.g. x1 * Wq=q1
-
+#https://towardsdatascience.com/lost-in-translation-found-by-transformer-46a16bf6418f
 
 ===========================
 
